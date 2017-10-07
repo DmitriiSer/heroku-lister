@@ -176,7 +176,7 @@
                 <assembleDirectory>target</assembleDirectory>
                 <programs>
                     <program>
-                        <mainClass>launch.Main</mainClass>
+                        <mainClass>serikov.dmitrii.Main</mainClass>
                         <name>webapp</name>
                     </program>
                 </programs>
