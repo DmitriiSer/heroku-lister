@@ -39,37 +39,52 @@ public class DBUtils {
 			return false;
 		}
 	}
-
 	private static boolean connectToRemoteDB() {
-		// get app properties
-		Map<String, String> appProperties = PropertyUtils.getAppProperties();
-		String MYSQL_CLUSTER_IP = appProperties.get("MYSQL_CLUSTER_IP");
-		String MYSQL_DATABASE = appProperties.get("MYSQL_DATABASE");
-		String MYSQL_PORT = appProperties.get("MYSQL_PORT");
-		if (MYSQL_PORT == null) {
-			MYSQL_PORT = DEFAULT_MYSQL_PORT;
-		}
-		String MYSQL_USER = appProperties.get("MYSQL_USER");
-		String MYSQL_PASSWORD = appProperties.get("MYSQL_PASSWORD");
-
-		StringBuilder url = new StringBuilder();
-		if (MYSQL_CLUSTER_IP != null) {
-			logger.info("Trying to connect to remote database at " + MYSQL_CLUSTER_IP + "...");
-
-			url.append("jdbc:mysql://").append(MYSQL_CLUSTER_IP).append(":").append(MYSQL_PORT).append("/")
-					.append(MYSQL_DATABASE).append("?verifyServerCertificate=false").append("&useSSL=true")
-					.append("&requireSSL=true");
-			try (Connection con = DriverManager.getConnection(url.toString(), MYSQL_USER, MYSQL_PASSWORD)) {
-				logger.info("Connection to the database established");
+		try{
+			String url = "jdbc:postgresql://ec2-54-235-88-58.compute-1.amazonaws.com:5432/d6j0ho5ldskfkd?user=wfzscqaqbfiiis&password=85797a53819ccf3ba92bad10a0b334958f5453faf854a63e923116b15511014c&sslmode=require";
+			con = DriverManager.getConnection(url);
+			if(con != null){
 				return true;
-			} catch (SQLException e) {
-				logger.error("Connection to the database hasn't been established");
 			}
-		} else {
-			logger.info("Cluster IP is not defined...");
+			else{
+				return false;
+			}
 		}
-		return false;
+		catch(Exception ex){
+			logger.error("unkown error conection to remove DB");
+			return false;
+		}
 	}
+//	private static boolean connectToRemoteDB() {
+//		// get app properties
+//		Map<String, String> appProperties = PropertyUtils.getAppProperties();
+//		String MYSQL_CLUSTER_IP = appProperties.get("MYSQL_CLUSTER_IP");
+//		String MYSQL_DATABASE = appProperties.get("MYSQL_DATABASE");
+//		String MYSQL_PORT = appProperties.get("MYSQL_PORT");
+//		if (MYSQL_PORT == null) {
+//			MYSQL_PORT = DEFAULT_MYSQL_PORT;
+//		}
+//		String MYSQL_USER = appProperties.get("MYSQL_USER");
+//		String MYSQL_PASSWORD = appProperties.get("MYSQL_PASSWORD");
+//
+//		StringBuilder url = new StringBuilder();
+//		if (MYSQL_CLUSTER_IP != null) {
+//			logger.info("Trying to connect to remote database at " + MYSQL_CLUSTER_IP + "...");
+//
+//			url.append("jdbc:mysql://").append(MYSQL_CLUSTER_IP).append(":").append(MYSQL_PORT).append("/")
+//					.append(MYSQL_DATABASE).append("?verifyServerCertificate=false").append("&useSSL=true")
+//					.append("&requireSSL=true");
+//			try (Connection con = DriverManager.getConnection(url.toString(), MYSQL_USER, MYSQL_PASSWORD)) {
+//				logger.info("Connection to the database established");
+//				return true;
+//			} catch (SQLException e) {
+//				logger.error("Connection to the database hasn't been established");
+//			}
+//		} else {
+//			logger.info("Cluster IP is not defined...");
+//		}
+//		return false;
+//	}
 
 	private static boolean connectToLocalDB() {
 		logger.info("Trying to connect to local database...");
