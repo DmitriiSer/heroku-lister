@@ -1,0 +1,73 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+  	id 'com.github.node-gradle.node' version '3.1.0'
+}
+
+group = 'serikov.dmitrii'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+ext {
+	slf4jVersion = '1.7.31'
+	gsonVersion = '2.8.7'
+	springfoxVersion = '3.0.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	
+	// SLF4J
+	implementation "org.slf4j:slf4j-api:$slf4jVersion"
+	implementation "org.slf4j:slf4j-ext:$slf4jVersion"
+	
+	// GSON
+	// implementation "com.google.code.gson:gson:$gsonVersion"
+	
+	// SpringFox
+	implementation "io.springfox:springfox-boot-starter:$springfoxVersion"
+	
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
+node {
+	nodeProjectDir = file("${project.projectDir}/src/main/ui")
+}
+
+task buildUI(type: NpxTask) {
+  	dependsOn npmInstall
+  	command = 'ng'
+  	args = ['build', '--prod']
+  	inputs.files('package.json', 'package-lock.json', 'angular.json', 'tsconfig.json', 'tsconfig.app.json')
+  	inputs.dir('src')
+  	inputs.dir(fileTree("src/main/ui/node_modules").exclude(".cache"))
+  	outputs.dir('dist')
+}
+
+task copyUI(type: Copy) {
+	from('src/main/ui/dist/lister') {
+        include '**/*'
+    }    
+    into 'src/main/resources/static'
+    
+    includeEmptyDirs = true
+}
+
+copyUI.dependsOn buildUI
+processResources.dependsOn copyUI

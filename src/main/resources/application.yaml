@@ -1,0 +1,5 @@
+# mongodb
+spring:
+  data:
+    mongodb:
+      uri: <MONGO_DB_CONNECT_URL>
