@@ -1,7 +1,9 @@
 <ng-container *ngIf="!authUser">
     <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Login</li>
+        <ul class="list-group list-group-flush text-center">
+            <li class="list-group-item header">
+                <h1 class="m-0">Login</h1>
+            </li>
             <li class="list-group-item">
                 <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
                     data-layout="default" data-auto-logout-link="true" data-use-continue-as="true" onlogin="login()">
