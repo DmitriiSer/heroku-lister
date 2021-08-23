@@ -3,7 +3,7 @@ import { Observable, from } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+// @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private oktaAuth: OktaAuthService) {

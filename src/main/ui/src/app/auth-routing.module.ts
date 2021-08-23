@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OKTA_CONFIG, OktaAuthModule, OktaCallbackComponent } from '@okta/okta-angular';
-import { HomeComponent } from './home/home.component';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AuthInterceptor } from './shared/okta/auth.interceptor';

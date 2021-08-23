@@ -1,0 +1,42 @@
+mat-toolbar {
+  background: rgba(144, 238, 144, 0.3);
+}
+
+.title {
+  font-family: 'Lobster', cursive;
+  font-weight: 500;
+  font-size: 2.25rem;
+  color: rgb(240, 255, 240);
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  font-family: 'Lobster', cursive;
+}
+
+.username {
+  margin: 0 1rem;
+  color: rgb(240, 255, 240);
+}
+
+.avatar {
+  min-width: auto;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: inset 0px 0px 15px rgb(0 0 0 / 30%);
+    transform: scale(1.1);
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

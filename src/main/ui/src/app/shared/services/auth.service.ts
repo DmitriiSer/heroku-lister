@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, EMPTY, from, Observable, of, OperatorFunction } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+
+import { UserDetails } from '../../model/user-details';
 
 import { environment } from '../../../environments/environment';
 
@@ -20,7 +21,7 @@ export class AuthService {
 
   private facebookAuth: BehaviorSubject<fb.AuthResponse> = new BehaviorSubject<fb.AuthResponse>(null as any);
 
-  private userDetails: any;
+  private userDetails: UserDetails | null = null;
 
   constructor(
     private router: Router,
@@ -91,21 +92,33 @@ export class AuthService {
     return this.facebookAuth;
   }
 
-  getUserDetails(): Observable<any> {
+  getUserDetails(): Observable<UserDetails> {
     return from(new Promise<any>(resolve => {
       const sessionUserDetails = sessionStorage.getItem(this.USER_DETAILS_KEY) as string;
       if (sessionUserDetails != null) {
-        this.userDetails = JSON.parse(sessionUserDetails);
+        this.userDetails = null;
+        try {
+          this.userDetails = JSON.parse(sessionUserDetails);
+        } catch (e) {
+          resolve(null);
+          return;
+        }
         console.log(`User details found in the cache.`);
-        console.log(`Good to see you, ${this.userDetails.name}.`);
         resolve(this.userDetails);
       }
       if (this.userDetails == null) {
         FB.api('/me', (userDetails: any) => {
           this.userDetails = userDetails;
-          sessionStorage.setItem(this.USER_DETAILS_KEY, JSON.stringify(this.userDetails));
-          console.log(`Good to see you, ${userDetails.name}.`);
-          resolve(this.userDetails);
+          FB.api(`/${userDetails.id}/picture?redirect=false&height=16`, 'get', {}, pictureDetails => {
+            console.log(`pictureDetails:`, pictureDetails);
+            // Insert your code here
+            if (this.userDetails != null) {
+              this.userDetails.picture = pictureDetails as any;
+              sessionStorage.setItem(this.USER_DETAILS_KEY, JSON.stringify(this.userDetails));
+              console.log(`Good to see you, ${userDetails.name}.`);
+              resolve(this.userDetails);
+            }
+          });
         });
       }
     }));

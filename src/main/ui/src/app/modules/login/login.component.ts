@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.dialog.open(LoginPopupComponent, {
       width: '300px',
-      // height: '250px',
       panelClass: 'no-padding-modal',
       disableClose: true
     });
