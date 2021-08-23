@@ -13,6 +13,9 @@ ext {
 	slf4jVersion = '1.7.31'
 	gsonVersion = '2.8.7'
 	springfoxVersion = '3.0.0'
+	oktaVersion = '2.1.0'
+	jjwtVersion = '0.11.2'
+	springSecurityOauth2Version = '2.5.2' // :2.0.5.RELEASE'
 }
 
 repositories {
@@ -21,9 +24,20 @@ repositories {
 
 dependencies {
 	// Spring Boot
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	
+	// Security / OAuth2
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation "com.okta.spring:okta-spring-boot-starter:$oktaVersion"
+	implementation "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$springSecurityOauth2Version"
+	runtimeOnly 'org.glassfish.jaxb:jaxb-runtime'
+	
+	// JJWT
+	// implementation "io.jsonwebtoken:jjwt-api:$jjwtVersion"
+    // runtimeOnly "io.jsonwebtoken:jjwt-impl:$jjwtVersion", "io.jsonwebtoken:jjwt-jackson:$jjwtVersion"
 	
 	// SLF4J
 	implementation "org.slf4j:slf4j-api:$slf4jVersion"
@@ -37,6 +51,7 @@ dependencies {
 	
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }
@@ -70,4 +85,4 @@ task copyUI(type: Copy) {
 }
 
 copyUI.dependsOn buildUI
-processResources.dependsOn copyUI
+// processResources.dependsOn copyUI
