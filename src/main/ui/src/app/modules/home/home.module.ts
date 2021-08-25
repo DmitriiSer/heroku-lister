@@ -10,6 +10,6 @@ import { HomeComponent } from './home.component';
     CommonModule,
     NavbarModule
   ],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent]
 })
 export class HomeModule { }
