@@ -7,12 +7,6 @@ import { UserDetails } from '../../model/user-details';
 
 import { environment } from '../../../environments/environment';
 
-interface Window {
-  [key: string]: any; // Add index signature
-}
-
-declare const window: Window;
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
@@ -20,7 +14,7 @@ export class AuthService {
   private baseUrl = '/api';
 
   private facebookAuth: BehaviorSubject<fb.AuthResponse> = new BehaviorSubject<fb.AuthResponse>(null as any);
-
+  private facebookPictureSize = 64;
   private userDetails: UserDetails | null = null;
 
   constructor(
@@ -109,7 +103,7 @@ export class AuthService {
       if (this.userDetails == null) {
         FB.api('/me', (userDetails: any) => {
           this.userDetails = userDetails;
-          FB.api(`/${userDetails.id}/picture?redirect=false&height=16`, 'get', {}, pictureDetails => {
+          FB.api(`/${userDetails.id}/picture?redirect=false&height=${this.facebookPictureSize}`, 'get', {}, pictureDetails => {
             console.log(`pictureDetails:`, pictureDetails);
             // Insert your code here
             if (this.userDetails != null) {
