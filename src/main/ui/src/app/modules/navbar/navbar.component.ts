@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class NavbarComponent implements OnInit {
   pictureUrl = '';
 
   constructor(
+    private router: Router,
     private authService: AuthService,
   ) { }
 
@@ -24,7 +26,9 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  createList() { }
+  createList() {
+    this.router.navigate(['/lists/new']);
+  }
 
   logout() {
     this.authService.facebookLogout();
