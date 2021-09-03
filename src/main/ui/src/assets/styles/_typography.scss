@@ -1,0 +1,64 @@
+:root {
+  --font-primary: Roboto, "Helvetica Neue", sans-serif;
+  --font-heading: Lobster, cursive;
+
+  /* set base values */
+  --text-base-size: 1em;
+  --text-scale-ratio: 1.15;
+
+  /* type scale */
+  --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+  --text-sm: calc(1em / var(--text-scale-ratio));
+  --text-md: calc(1em * var(--text-scale-ratio));
+  --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base-size);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+.heading,
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-xxs);
+  line-height: var(--heading-line-height);
+}
+
+h1,
+.mat-typography h1,
+.text--xxl {
+  font-size: var(--text-xxl);
+}
+
+h2,
+.mat-typography h2,
+.text--xl {
+  font-size: var(--text-xl);
+}
+
+h3,
+.mat-typography h3,
+.text--lg {
+  font-size: var(--text-lg);
+}
+
+h4,
+.text--md {
+  font-size: var(--text-md);
+}

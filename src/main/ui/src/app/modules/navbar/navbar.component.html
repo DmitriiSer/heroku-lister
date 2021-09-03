@@ -1,8 +1,12 @@
 <mat-toolbar>
-    <span class="title">{{ title }}</span>
+
+    <h1 class="title">{{ title }}</h1>
+
     <span class="spacer"></span>
+
     <span class="menu">
-        <span class="username">{{ user }}</span>
+        <h4 class="username">{{ user }}</h4>
+
         <button mat-flat-button [matMenuTriggerFor]="menu" class="avatar" aria-label="User avatar"
             [style.backgroundImage]="'url(' + pictureUrl + ')'">
         </button>
