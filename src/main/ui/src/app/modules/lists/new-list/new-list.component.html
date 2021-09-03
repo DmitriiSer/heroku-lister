@@ -1,18 +1,21 @@
-<section>
-    <mat-form-field appearance="standard">
-        <mat-label>List title:</mat-label>
-        <input matInput>
-    </mat-form-field>
-</section>
+<div id="backdrop" (click)="backdropClick()"></div>
+<div id="modal">
+    <section>
+        <mat-form-field appearance="standard">
+            <mat-label class="heading">List title:</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </section>
 
-<section class="content">
-    <mat-form-field class="stretch-height">
-        <textarea matInput></textarea>
-    </mat-form-field>
-</section>
+    <section class="content">
+        <mat-form-field class="stretch-height">
+            <textarea matInput></textarea>
+        </mat-form-field>
+    </section>
 
-<section class="buttons">
-    <button id="submit" mat-fab (click)="saveList()">
-        <mat-icon>check</mat-icon>
-    </button>
-</section>
+    <section class="buttons">
+        <button id="submit" mat-fab (click)="saveList()">
+            <mat-icon>check</mat-icon>
+        </button>
+    </section>
+</div>
