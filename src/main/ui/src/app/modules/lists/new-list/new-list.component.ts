@@ -12,4 +12,8 @@ export class NewListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  saveList() {
+
+  }
+
 }
