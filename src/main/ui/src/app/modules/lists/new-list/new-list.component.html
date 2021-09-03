@@ -1,9 +1,12 @@
 <div id="backdrop" (click)="backdropClick()"></div>
 <div id="modal">
-    <section>
-        <mat-form-field appearance="standard">
-            <mat-label class="heading">List title:</mat-label>
-            <input matInput>
+    <section class="header">
+        <h1 class="title" [class.hide]="editTitle" (click)="listTitleFocus()">
+            {{listTitle !== '' ? listTitle : 'List title:'}}</h1>
+
+        <mat-form-field class="heading text--xxl" [class.hide]="!editTitle" appearance="standard">
+            <input matInput #titleInput [(ngModel)]="listTitle" (blur)="listTitleChange()"
+                (keypress)="listTitleKeyPress($event.key)">
         </mat-form-field>
     </section>
 

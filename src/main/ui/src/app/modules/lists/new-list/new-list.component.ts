@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,21 +6,43 @@ import { Location } from '@angular/common';
   templateUrl: './new-list.component.html',
   styleUrls: ['./new-list.component.scss']
 })
-export class NewListComponent implements OnInit {
+export class NewListComponent {
+
+  listTitle = '';
+  editTitle = false;
+
+  @ViewChild('titleInput') titleInput!: ElementRef;
 
   constructor(
+    private zone: NgZone,
     private location: Location
   ) { }
 
-  ngOnInit(): void {
-  }
 
   backdropClick() {
     this.location.back();
   }
 
-  saveList() {
+  listTitleFocus() {
+    this.editTitle = true;
+    this.zone.run(() => {
+      setTimeout(() => {
+        this.titleInput.nativeElement.focus();
+      });
+    });
+  }
 
+  listTitleKeyPress(key: string) {
+    if (key === 'Enter') {
+      this.listTitleChange();
+    }
+  }
+
+  listTitleChange() {
+    this.editTitle = false;
+  }
+
+  saveList() {
   }
 
 }
