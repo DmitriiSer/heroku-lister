@@ -95,12 +95,7 @@
         padding: 0 1rem;
         cursor: pointer;
 
-        mat-form-field,
-        input {
-          font-family: var(--font-heading);
-        }
-
-        // background
+        // Header background gradient
         &::before {
           position: absolute;
           content: '';
@@ -113,9 +108,12 @@
         }
       }
 
+      // Input field style
       mat-form-field {
         width: 100%;
-        height: 50px !important;
+        height: 50px;
+        font-family: var(--font-heading);
+        background-color: white;
 
         ::ng-deep {
           .mat-form-field-wrapper {
@@ -141,8 +139,8 @@
     .content {
       flex-grow: 1;
 
+      // Textarea field style
       mat-form-field {
-        $x: 0rem; // 1.34375em;
         width: 100%;
         height: 100%;
 
@@ -152,7 +150,7 @@
           }
 
           .mat-form-field-wrapper {
-            height: calc(100% - #{$x});
+            height: calc(100%);
             padding: 0 1rem var(--text-lg) 1rem;
           }
 
@@ -162,7 +160,7 @@
           }
 
           .mat-form-field-infix {
-            height: calc(100% - #{$x} - 2px);
+            height: calc(100% - 2px);
           }
 
           .mat-form-field-underline {
