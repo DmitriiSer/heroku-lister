@@ -63,7 +63,9 @@ test {
 
 node {
 	nodeProjectDir = file("${project.projectDir}/src/main/ui")
+	npmInstallCommand = System.getenv("CI") ? 'ci' : 'install'
 }
+
 
 task buildUI(type: NpxTask) {
   	dependsOn npmInstall
@@ -85,4 +87,4 @@ task copyUI(type: Copy) {
 }
 
 copyUI.dependsOn buildUI
-// processResources.dependsOn copyUI
+processResources.dependsOn copyUI

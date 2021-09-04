@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../../../../assets/styles/media';
 
 .hide {
@@ -43,7 +44,7 @@
       border: $border-size solid $border-color03;
       border-top-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
-      transform: translate(#{(100vw - $width) / 2}, #{(100vh - $height) / 2});
+      transform: translate(math.div(100vw - $width, 2), math.div(100vh - $height, 2));
 
       &::before,
       &::after {
@@ -74,7 +75,7 @@
       $height: 80vh;
       width: $width;
       height: $height;
-      transform: translate(#{(100vw - $width) / 2}, #{(100vh - $height) / 2});
+      transform: translate(math.div(100vw - $width, 2), math.div(100vh - $height, 2));
     }
 
     @include gt-lg {
@@ -82,7 +83,7 @@
       $height: 80vh;
       width: $width;
       height: $height;
-      transform: translate(#{(100vw - $width) / 2}, #{(100vh - $height) / 2});
+      transform: translate(math.div(100vw - $width, 2), math.div(100vh - $height, 2));
     }
 
     // Header styles
