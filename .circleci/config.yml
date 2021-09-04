@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/openjdk:11.0.12
+      - image: cimg/openjdk:11.0.12-node
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - checkout
+      - run: java --version
+      - run: node --version
 
       # Download and cache dependencies
       - restore_cache:
