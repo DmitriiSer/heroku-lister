@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Dmitrii Serikov
  */
 // @WebServlet(name = "DataServlet", urlPatterns = { "/DataServlet" })
-@RestController
+//@RestController
 public class DataServlet { //extends HttpServlet {
 	
 	private static final XLogger logger = XLoggerFactory.getXLogger(DataServlet.class);
